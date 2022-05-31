@@ -1,0 +1,32 @@
+{% load i18n %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="{{ idioma }}">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block titulo %}{% endblock %}</title>
+    <link href="{% static 'meublog.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+<div id="content">
+    {% block conteudo %}
+    {% endblock %}
+</div>
+<div id="sidebar">
+    <h2> {% trans 'Meu Blog' %}</h2>
+    <p>{% trans 'Este é o meu blog' %}</p>
+    {% ifequal user.username "" %}
+        <p><a href="{% url 'meublog:cadastrouser' %}">{% trans 'Cadastrar' %}</a></p>
+        <p><a href="{% url 'meublog:loginuser' %}">{% trans 'Login' %}</a></p>
+    {% else %}
+        <p>{% trans 'Usuário' %}: {{ user.username }}</p>
+        <p><a href="{% url 'meublog:logoutuser' %}">{% trans 'Sair' %}</a></p>
+    {% endifequal %}
+
+
+</div>
+
+</body>
+</html>

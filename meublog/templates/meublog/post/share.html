@@ -1,0 +1,12 @@
+{% extends "meublog/base.html" %}
+{% load i18n %}
+{% block title %} {% trans 'Enviando o post' %} {{ post.titulo }}{% endblock %}
+
+{% block conteudo %}
+    <h1> {% trans 'Enviar' %} {{ post.titulo }} {% trans 'para e-mail' %} </h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="{% trans 'Enviar' %}">
+    </form>
+{% endblock %}

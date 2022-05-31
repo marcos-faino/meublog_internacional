@@ -1,0 +1,16 @@
+{% extends "meublog/base.html" %}
+
+{% block titulo %} Login {% endblock %}
+
+{% block conteudo %}
+{% if messages %}
+    {% for m in messages %}
+        <p>{{ m }}</p>
+    {% endfor %}
+{% endif %}
+<form method="post" action="{% url 'meublog:loginuser' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Login" />
+</form>
+{% endblock%}

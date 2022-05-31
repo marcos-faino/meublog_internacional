@@ -1,0 +1,32 @@
+{% extends "meublog/base.html" %}
+{% load i18n %}
+
+{% block titulo %} {{ post.title }} {% endblock %}
+
+{% block conteudo %}
+
+    {% if user.is_authenticated %}
+        <form method="post" action="{% url 'meublog:comentar_post' post.id %}" novalidate>
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="nome">{% trans 'Nome' %}:</label>
+                <input type="text" id="nome" name="nome" value="{{ user.username }}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="email">{% trans 'E-mail' %}</label>
+                <input type="text" id="email" name="email">
+            </div>
+            <div class="form-group">
+                <label for="corpo">{% trans 'Comentário' %}:</label>
+                <textarea id="corpo" name="corpo" rows="6" cols="23"></textarea>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="{% trans 'Salvar' %}" />
+            </div>
+        </form>
+    {% else %}
+        <h3>{% trans 'Página Disponível apenas para usuários autenticados' %}</h3>
+        <h4>{% trans 'Por favor faça login ou cadastre-se' %}</h4>
+        <p><a href="{% url 'meublog:listar_posts' %}">{% trans 'Voltar aos Posts' %}</a></p>
+    {% endif %}
+{% endblock%}

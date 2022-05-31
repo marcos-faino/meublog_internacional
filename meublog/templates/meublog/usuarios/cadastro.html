@@ -1,0 +1,16 @@
+{% extends "meublog/base.html" %}
+{% load i18n %}
+
+{% block titulo %} {% trans 'Cadastro de Usuários' %} {% endblock %}
+
+{% block conteudo %}
+<div class="container" >
+    <form method="post" action="{% url 'meublog:cadastrouser' %}">
+
+        {% csrf_token %}
+        {{ form.as_p }}
+        <br>
+        <input type="submit" value="{% trans 'Salvar' %}" />
+    </form>
+</div>
+{% endblock%}
